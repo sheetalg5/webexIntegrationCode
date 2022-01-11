@@ -1,5 +1,9 @@
 package com.webex.integration.service.impl;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -12,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 import com.webex.integration.model.GetAccessTokenRequest;
 import com.webex.integration.model.GetAccessTokenResponse;
+import com.webex.integration.model.Invitees;
 import com.webex.integration.model.ScheduleMeetingRequest;
 import com.webex.integration.model.WebExMeetingRequest;
 import com.webex.integration.service.WebEx;
@@ -95,8 +100,17 @@ public class WebExService implements WebEx {
 		webexrequest.setAutomaticLockMinutes(0);
 		webexrequest.setAllowFirstUserToBeCoHost(false);
 		webexrequest.setAllowAuthenticatedDevices(false);
+		String[] invitees=request.getInvitees().split(",");
+		List<Invitees> inviteesList=new ArrayList<>();
+				
+		Arrays.asList(invitees).stream().forEach(x->
+		inviteesList.add(new Invitees(x,"",false))
 		
-		webexrequest.setInvitees(request.getInvitees());
+		);
+		;
+		
+		
+		webexrequest.setInvitees(inviteesList);
 		webexrequest.setSendEmail(true);
 		webexrequest.setHostEmail(request.getHostEmail());
 		return webexrequest;

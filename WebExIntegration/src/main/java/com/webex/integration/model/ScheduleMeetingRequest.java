@@ -19,7 +19,8 @@ public class ScheduleMeetingRequest {
 	String start_time;
 	String end_time;
 	String timezone;
-	List<Invitees> invitees;
+	String invitees;
+	List<Invitees> inviteess;
 	String hostEmail;
 	String clientId;
 	String clientSecret;
@@ -39,6 +40,7 @@ public class ScheduleMeetingRequest {
 		result = prime * result + ((grantType == null) ? 0 : grantType.hashCode());
 		result = prime * result + ((hostEmail == null) ? 0 : hostEmail.hashCode());
 		result = prime * result + ((invitees == null) ? 0 : invitees.hashCode());
+		result = prime * result + ((inviteess == null) ? 0 : inviteess.hashCode());
 		result = prime * result + ((redirectURI == null) ? 0 : redirectURI.hashCode());
 		result = prime * result + ((start_time == null) ? 0 : start_time.hashCode());
 		result = prime * result + ((timezone == null) ? 0 : timezone.hashCode());
@@ -99,6 +101,11 @@ public class ScheduleMeetingRequest {
 				return false;
 		} else if (!invitees.equals(other.invitees))
 			return false;
+		if (inviteess == null) {
+			if (other.inviteess != null)
+				return false;
+		} else if (!inviteess.equals(other.inviteess))
+			return false;
 		if (redirectURI == null) {
 			if (other.redirectURI != null)
 				return false;
@@ -121,7 +128,7 @@ public class ScheduleMeetingRequest {
 			return false;
 		return true;
 	}
-
+	
 	
 	
 
